@@ -57,6 +57,10 @@ def compare(expected: str, guess: str) -> typing.List[str]:
                     output[index] = "?"
                     counted_pos.add(pos)
                     break
+
+    if(expected == ""):
+        output = ["_"] * 5
+
     return output
 
 if __name__ == '__main__':
@@ -105,23 +109,24 @@ To quit, press CTRL-C.
 
             if (result.count("X") == 0 and result.count("?") == 0 and WORD=="" and len(GUESSWORD_WORDLIST)>2):
                 GUESSWORD_WORDLIST = [ele for ele in GUESSWORD_WORDLIST if all(ch not in ele for ch in letters)]
+                print(GUESSWORD_WORDLIST)
+
+                for i in GUESSWORD_WORDLIST:
+                    compare(expected=i,guess=GUESS) ##Then count the number of hits
+                    #appened to list 
+                    hit = word.count("X")
+                    nearhit = word.count("?")
+                    print(word)
+                    print(hit)
+                    print(nearhit)
+
+                # Go through list and use compare with the input word 
 
             elif (len(GUESSWORD_WORDLIST)==2): #change this to better 
-                wordlist = []
                 for word in GUESSWORD_WORDLIST:
-                    wordlist.append([]) 
-                    for i in GUESSWORD_WORDLIST: 
-                        hit = word.count("X")
-                        nearhit = word.count("?")
-                        wordlist[word].append(hit)
-                        wordlist[word].append(nearhit) 
-
+                    print(GUESSWORD_WORDLIST)
                     # Less “Hit” is better.
                     # If they have the same number of “Hit”, less “Near hit” is better.
-
-                    # WORD = wordlist[1].min() 
-                    
-                    # wordlist[2].min()
 
             print(" ".join(result))
 
