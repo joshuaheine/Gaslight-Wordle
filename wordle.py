@@ -107,26 +107,24 @@ To quit, press CTRL-C.
 
             result = compare(expected=WORD, guess=GUESS)
 
-            if (result.count("X") == 0 and result.count("?") == 0 and WORD=="" and len(GUESSWORD_WORDLIST)>2):
+            if (result.count("X") == 0 and result.count("?") == 0 and WORD=="" and len(GUESSWORD_WORDLIST)>2): # need to change this
                 GUESSWORD_WORDLIST = [ele for ele in GUESSWORD_WORDLIST if all(ch not in ele for ch in letters)]
-                print(GUESSWORD_WORDLIST)
 
-                for i in GUESSWORD_WORDLIST:
-                    compare(expected=i,guess=GUESS) ##Then count the number of hits
-                    #appened to list 
-                    hit = word.count("X")
-                    nearhit = word.count("?")
-                    print(word)
-                    print(hit)
-                    print(nearhit)
+            wordlist = []
+            for i in GUESSWORD_WORDLIST:
+                wordlist1 = []
+                resultX = compare(expected=i,guess=GUESS)
+                #appened to list 
+                hit = resultX.count("X")
+                nearhit = resultX.count("?")
+                wordlist1.append(i)
+                wordlist1.append(hit)
+                wordlist1.append(nearhit)
+                wordlist.append(wordlist1)
+                for j in wordlist:
 
-                # Go through list and use compare with the input word 
+                    WORD = wordlist[j][0]
 
-            elif (len(GUESSWORD_WORDLIST)==2): #change this to better 
-                for word in GUESSWORD_WORDLIST:
-                    print(GUESSWORD_WORDLIST)
-                    # Less “Hit” is better.
-                    # If they have the same number of “Hit”, less “Near hit” is better.
 
             print(" ".join(result))
 
