@@ -97,6 +97,7 @@ To quit, press CTRL-C.
 
     try:
         while True:
+            # set word to "" until a word can be generated
             WORD=""
             GUESS = get_user_guess(
                 wordlen=GAME_WORD_LENGTH, wordlist=GAMEWORD_WORDLIST)
@@ -105,25 +106,28 @@ To quit, press CTRL-C.
             # Trying to remove letters from the list to then generate a final word to guess
             letters = (list(GUESS))
 
+            # This checks the first pair of the word  
             result = compare(expected=WORD, guess=GUESS)
 
-            if (result.count("X") == 0 and result.count("?") == 0 and WORD=="" and len(GUESSWORD_WORDLIST)>2): # need to change this
+            if (result.count("X") == 0 and result.count("?") == 0 and WORD=="" and len(GUESSWORD_WORDLIST)>2): # need to change this to have a better condition for removing words on the list
                 GUESSWORD_WORDLIST = [ele for ele in GUESSWORD_WORDLIST if all(ch not in ele for ch in letters)]
 
             wordlist = []
             for i in GUESSWORD_WORDLIST:
                 wordlist1 = []
                 resultX = compare(expected=i,guess=GUESS)
-                #appened to list 
                 hit = resultX.count("X")
                 nearhit = resultX.count("?")
                 wordlist1.append(i)
                 wordlist1.append(hit)
                 wordlist1.append(nearhit)
                 wordlist.append(wordlist1)
-                for j in wordlist:
 
-                    WORD = wordlist[j][0]
+            #need to use wordlist here and go trough and calculate score with hit and near hit
+            #if statement here???
+            #for j in wordlist:
+                #if (wordlist[][1] and wordlist[j][]): #find lowest hit, and if s
+                #WORD = [wordlist][0]
 
 
             print(" ".join(result))
