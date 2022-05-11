@@ -122,14 +122,10 @@ To quit, press CTRL-C.
                 wordlist1.append(hit)
                 wordlist1.append(nearhit)
                 wordlist.append(wordlist1)
-
-            #need to use wordlist here and go trough and calculate score with hit and near hit
-            #if statement here???
-            #for j in wordlist:
-                #if (wordlist[][1] and wordlist[j][]): #find lowest hit, and if s
-                #WORD = [wordlist][0]
-
-
+                #print(wordlist)
+                sorted_data = sorted(wordlist, key=lambda x: x[1])
+                WORD = sorted_data[0][0]
+                
             print(" ".join(result))
 
             if WORD == GUESS:
@@ -138,6 +134,7 @@ To quit, press CTRL-C.
             elif NUM_GUESSES == 6:
                 print(f"the correct answer was {WORD.upper()}.")
                 break
+
     except KeyboardInterrupt:
         print(f"""
 You quit - the correct answer was {WORD.upper()}
