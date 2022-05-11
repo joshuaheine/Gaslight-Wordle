@@ -122,10 +122,13 @@ To quit, press CTRL-C.
                 wordlist1.append(hit)
                 wordlist1.append(nearhit)
                 wordlist.append(wordlist1)
-                #print(wordlist)
-                sorted_data = sorted(wordlist, key=lambda x: x[1])
+            if (WORD == ""):
+                sorted_data = sorted(wordlist, key=lambda x: (-x[2],-x[1],x[0]))
+                print(sorted_data)
                 WORD = sorted_data[0][0]
-                
+                print(WORD)
+
+            result = compare(expected=WORD, guess=GUESS)
             print(" ".join(result))
 
             if WORD == GUESS:
@@ -137,6 +140,5 @@ To quit, press CTRL-C.
 
     except KeyboardInterrupt:
         print(f"""
-You quit - the correct answer was {WORD.upper()}
-and you took {NUM_GUESSES} guesses
+You quit
 """)
