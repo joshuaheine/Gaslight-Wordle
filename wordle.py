@@ -1,6 +1,4 @@
-import random
 import typing
-from itertools import groupby
 
 GAMEWORD_LIST_FNAME = "gamewords.txt"
 
@@ -109,10 +107,11 @@ To quit, press CTRL-C.
             # This checks the first pair of the word  
             result = compare(expected=WORD, guess=GUESS)
 
-            if (result.count("X") == 0 and result.count("?") == 0 and WORD=="" and len(GUESSWORD_WORDLIST)>2): # need to change this to have a better condition for removing words on the list
+            if (result.count("X") == 0 and result.count("?") == 0 and len(GUESSWORD_WORDLIST)>2):
                 GUESSWORD_WORDLIST = [ele for ele in GUESSWORD_WORDLIST if all(ch not in ele for ch in letters)]
 
             wordlist = []
+            
             for i in GUESSWORD_WORDLIST:
                 wordlist1 = []
                 resultX = compare(expected=i,guess=GUESS)
@@ -122,12 +121,14 @@ To quit, press CTRL-C.
                 wordlist1.append(hit)
                 wordlist1.append(nearhit)
                 wordlist.append(wordlist1)
-            if (WORD == ""):
-                sorted_data = sorted(wordlist, key=lambda x: (-x[2],-x[1],x[0]))
-                print(sorted_data)
-                WORD = sorted_data[0][0]
-                print(WORD)
 
+            sorted_data = sorted(wordlist, key=lambda x: (-x[2],-x[1]))
+            WORD = sorted_data[0][0]
+            for j in range(len(sorted_data)):
+                if(sorted_data[j][1] == 5):
+                    WORD = sorted_data[j][0]
+            print(sorted_data)
+                
             result = compare(expected=WORD, guess=GUESS)
             print(" ".join(result))
 
